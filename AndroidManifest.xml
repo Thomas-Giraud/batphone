@@ -132,4 +132,56 @@
 	<uses-permission android:name="android.permission.GET_ACCOUNTS" ></uses-permission>
     <uses-permission android:name="android.permission.READ_SMS"></uses-permission>
     <uses-permission android:name="android.permission.WRITE_SMS"></uses-permission>
+=======
+      package="org.servalproject.connectorwebsmsdt"
+      android:versionCode="1"
+      android:versionName="1.0">
+    <uses-sdk android:minSdkVersion="8" />
+
+
+	<application android:label="@string/app_name" android:icon="@drawable/icon"
+		android:debuggable="true">
+
+		<!--
+			This Activity is brought by the WebSMS Connector Plugin API. It shows
+			a simple information about this connector when launching it via
+			"open" button from android market.
+		-->
+		<activity android:name="de.ub0r.android.websms.connector.common.InfoActivity"
+			android:label="@string/app_name" android:icon="@drawable/icon"
+			android:theme="@android:style/Theme.Translucent.NoTitleBar">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.INFO" />
+			</intent-filter>
+		</activity>
+		
+		<!-- Service doing all the IO. -->
+		<service android:name="de.ub0r.android.websms.connector.common.ConnectorService"
+			android:exported="false" />
+
+		<activity android:name="org.servalproject.dt.Preferences">
+			<intent-filter>
+				<action android:name="org.servalproject.connectorwebsmsdt.PREFS" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+		<receiver android:name="org.servalproject.dt.ConnectorDT"
+			android:enabled="true" android:exported="true">
+			<intent-filter>
+				<action android:name="org.servalproject.connectorwebsmsdt.RUN_UPDATE" />
+				<action android:name="org.servalproject.connectorwebsmsdt.RUN_SEND" />
+				<action android:name="de.ub0r.android.websms.connector.UPDATE" />
+			</intent-filter>
+		</receiver>
+	</application>
+	<uses-sdk android:minSdkVersion="3" android:targetSdkVersion="8" />
+	<supports-screens android:smallScreens="true"
+		android:normalScreens="true" android:largeScreens="true"
+		android:anyDensity="true" />
+	<uses-feature android:name="android.hardware.touchscreen"
+		android:required="false" />
+	<!-- 	<uses-permission android:name="android.permission.INTERNET" /> -->
+	<!-- WAKE_LOCK needed to make sure, sms are send even if user sends device to sleep. -->
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
 </manifest> 
