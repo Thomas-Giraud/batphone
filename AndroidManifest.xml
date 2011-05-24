@@ -129,9 +129,10 @@
 	    </receiver>
         <receiver android:name="org.servalproject.dt.Receiver">
 	        <intent-filter>
-		 		<action android:name="android.intent.action.PICK" />
+		 		<!-- <action android:name="android.intent.action.DEFAULT" /> -->
+		 		<action android:name="org.servalproject.DT"></action>
 		 		<category android:name="android.intent.category.DEFAULT" />
-				<data android:mimeType="vnd.servalproject.DTSMS/vnd.servalproject.DTSMS-text" />
+				<!--<data android:mimeType="vnd.servalproject.DT/vnd.servalproject.DT" />-->
 			</intent-filter> 
 		</receiver>
     </application>
